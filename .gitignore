@@ -1,0 +1,59 @@
+### Node / Next.js ###
+node_modules
+.next
+out
+dist
+build
+
+### Env files ###
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+### Logs & diagnostics ###
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+### Dependency locks (choose one manager; keep others ignored) ###
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+### OS / Editor ###
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.iml
+
+### TypeScript ###
+*.tsbuildinfo
+
+### Coverage / testing ###
+coverage
+.nyc_output
+
+### Misc build artifacts ###
+.vercel
+.turbo
+*.tgz
+
+### Prisma ###
+prisma/dev.db*
+prisma/*.db-journal
+
+### NextAuth debug ###
+.nextauth*
+
+### Tailwind JIT cache ###
+.tailwindcache
