@@ -11,14 +11,26 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!
     })
   ],
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60 // 30 days
+  },
   pages: {
     signIn: "/auth/signin"
   },
   callbacks: {
-    async session({ session, user }) {
+    async jwt({ token, user }) {
+      // On initial sign-in, persist id & role into token
+      if (user) {
+        (token as any).id = (user as any).id;
+        (token as any).role = (user as any).role;
+      }
+      return token;
+    },
+    async session({ session, token }) {
       if (session.user) {
-        (session.user as Session["user"] & { id: string; role?: string }).id = user.id;
-        (session.user as any).role = user.role;
+        if ((token as any)?.id) (session.user as any).id = (token as any).id;
+        if ((token as any)?.role) (session.user as any).role = (token as any).role;
       }
       return session;
     },
