@@ -62,5 +62,14 @@ The first time the user with `ADMIN_EMAIL` signs in, their role is updated to AD
 - Add password (credentials) provider
 - Add user profile edit form
 
+### Troubleshooting Login / Session
+If user info not visible:
+1. Confirm `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` match credentials in Google Cloud Console.
+2. Ensure Authorized origin: http://localhost:3000 and redirect: http://localhost:3000/api/auth/callback/google.
+3. Check session at /debug/session.
+4. Delete local DB (prisma/dev.db*) and rerun migration if schema drift suspected.
+5. Make sure cookies not blocked (try incognito window).
+6. Verify `NEXTAUTH_URL` is http://localhost:3000 in `.env.local`.
+
 ---
 MIT License

@@ -13,7 +13,10 @@ export default function NavBar() {
           <Link href="/profile">Profile</Link>
           <Link href="/admin">Admin</Link>
           {status === "authenticated" ? (
-            <button onClick={() => signOut({ callbackUrl: "/" })} className="text-red-600">Sign out</button>
+            <>
+              <span className="text-gray-600 hidden md:inline">{session?.user?.email || session?.user?.name}</span>
+              <button onClick={() => signOut({ callbackUrl: "/" })} className="text-red-600">Sign out</button>
+            </>
           ) : (
             <Link className="text-blue-600" href="/auth/signin">Sign in</Link>
           )}

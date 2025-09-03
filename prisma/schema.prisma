@@ -43,6 +43,14 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  // Extended profile fields
+  firstName     String?   @default("")
+  lastName      String?   @default("")
+  displayName   String?   @default("")
+  bio           String?   @default("")
+  location      String?   @default("")
+  website       String?   @default("")
+  phone         String?   @default("")
   role          String    @default("USER") // Use string instead of enum for SQLite
   accounts      Account[]
   sessions      Session[]
