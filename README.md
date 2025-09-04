@@ -52,6 +52,31 @@ The first time the user with `ADMIN_EMAIL` signs in, their role is updated to AD
 - `npm run prisma:migrate` – run migration (alias for initial init name)
 - `npm run prisma:studio` – open Prisma Studio
 
+### Profile REST API
+- `GET /api/profile`: returns the authenticated user record
+- `POST /api/profile`: initialize minimal profile fields on first login; only fills empty fields (idempotent)
+- `PUT /api/profile`: update profile fields explicitly
+
+Allowed fields: `firstName`, `lastName`, `displayName`, `bio`, `location`, `website`, `phone`.
+
+Example init (first social login):
+```
+fetch('/api/profile', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ firstName: 'Ada', lastName: 'Lovelace', displayName: 'Ada' })
+})
+```
+
+Example update (later edits):
+```
+fetch('/api/profile', {
+  method: 'PUT',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ bio: 'Computing pioneer', website: 'https://example.com' })
+})
+```
+
 ### Notes
 - SQLite is fine for dev; swap `provider` and `DATABASE_URL` for Postgres/MySQL in `schema.prisma` for production.
 - Ensure `NEXTAUTH_URL` matches your deployment URL when deploying.
